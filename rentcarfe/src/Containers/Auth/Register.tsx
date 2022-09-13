@@ -4,6 +4,7 @@ import {Button} from "../../Components/Button/Button";
 import {Formik} from 'formik';
 import {AuthInitialValues, AuthValidationSchema} from "./utils";
 import {AUTH_KEY} from "./types";
+import {FormikInput} from "../../Components/Input/FormikInput";
 
 export const Register: FunctionComponent = () => {
     return <div className="w-full h-full">
@@ -14,13 +15,20 @@ export const Register: FunctionComponent = () => {
                     initialValues={AuthInitialValues[AUTH_KEY.REGISTER]}
                     validationSchema={AuthValidationSchema[AUTH_KEY.REGISTER]}
                     onSubmit={(v) => console.log(v)}>
-                    <form>
-                        <Input label="Username" placeholder="Adam123"/>
-                        <Input label="E-mail" placeholder="example@gmail.com"/>
-                        <Input label="Password" placeholder="************" type="password"/>
-                        <Input label="Repeat password" placeholder="************" type="password"/>
-                        <div className="mt-10"><Button>Send</Button></div>
-                    </form>
+                    {({handleSubmit}) => <form>
+                        <FormikInput name="username" label="Username" placeholder="Adam123"/>
+                        <FormikInput name="email" label="E-mail" placeholder="example@gmail.com"/>
+                        <FormikInput name="password" label="Password" placeholder="************" type="password"/>
+                        <FormikInput name="passwordRepeat" label="Repeat password" placeholder="************"
+                                     type="password"/>
+                        <div className="mt-10">
+                            <Button type="submit" onClick={e => {
+                                e.preventDefault()
+                                handleSubmit()
+                            }
+                            }>Send</Button>
+                        </div>
+                    </form>}
                 </Formik>
 
             </div>
