@@ -37,6 +37,7 @@ export const Register: FunctionComponent = () => {
         </div>
         {/*car */}
         <div className="w-1/2  h-full relative overflow-hidden">
+            <h1 className="font-extrabold tracking-[.04em] ml-[10px] text-[88px]">Mongo_car</h1>
             <span
                 className="block w-full h-[80px] bg-[#8c2486] absolute bottom-[160px] right-[-500px] rotate-[130deg]"/>
             <span
