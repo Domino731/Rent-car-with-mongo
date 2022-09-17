@@ -6,12 +6,15 @@ import {AuthInitialValues, AuthValidationSchema} from "./utils";
 import {AUTH_KEY} from "./types";
 import {FormikInput} from "../../Components/Input/FormikInput";
 import Car from '../../Assets/camaro.png'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {authRegister} from "../../Redux/auth/thunks";
 import {AnyAction} from "@reduxjs/toolkit";
+import {authRegisterLoaderSelector} from "../../Redux/auth/selectors";
 
 export const Register: FunctionComponent = () => {
     const dispatch = useDispatch();
+
+    const authRegisterLoader = useSelector(authRegisterLoaderSelector);
 
     const handleRegisterUser = useCallback((formikValues: FormikValues) => {
         const {username, email, password} = formikValues;
@@ -34,7 +37,7 @@ export const Register: FunctionComponent = () => {
                         <FormikInput name="email" label="E-mail" placeholder="example@gmail.com"/>
                         <FormikInput name="password" label="Password" placeholder="************" type="password"/>
                         <div className="mt-10">
-                            <Button type="submit" onClick={e => {
+                            <Button type="submit" disabled={authRegisterLoader} onClick={e => {
                                 e.preventDefault()
                                 handleSubmit()
                             }

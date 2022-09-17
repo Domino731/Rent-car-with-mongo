@@ -3,3 +3,8 @@ export interface NewUser {
     username: string;
     email: string;
 }
+
+export interface User {
+    username: string;
+    id: string;
+}

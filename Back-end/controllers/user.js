@@ -3,18 +3,18 @@ const jwt = require('jsonwebtoken');
 const {EXPIRATION_TIME} = require("../const");
 
 const handleError = (error) => {
-    let message = {text: '', code: 0}
-    console.log(error);
-    if (error.message === 'Incorrect email') {
-        message.text = 'Pass valid e-mail';
-        message.code = 'AL1'
+    let message = {text: ''}
+    if (error.message === 'Missing email') {
+        message.text = 'Missing e-mail';
+    } else if (error.message === 'E-mail must be unique') {
+        message.text = 'This e-mail is already assigned to another account';
+    } else if (error.message === 'Please, enter an valid e-mail') {
+        message.text = 'Invalid e-mail';
+    } else if (error.message === 'Missing password') {
+        message.test = 'Missing password';
+    } else if (error.message === 'Password is too short') {
+        message.test = 'Password is too short';
     }
-    if (error.message == 'Incorrect password') {
-
-        message.text = 'Pass correct password';
-        message.code = 'AL2'
-    }
-
     return message;
 }
 
@@ -30,18 +30,20 @@ module.exports.register_post = async (req, res) => {
     const {email, password, username} = req.body;
 
     try {
+        // create new user
         const user = await UserModel.create({email, password, username});
+
         // set jwt token to cookie
         const token = createToken(user._id);
         res.cookie('jwt', token, {
-            httpOnly: true,      // 3 days in milliseconds
+            httpOnly: true,
             expiresIn: 3 * 60 * 60 * 24 * 1000
         });
-        res.status(201).json({data: user, status: 201});
-    } catch (err) {
-        // console.log(err);
-        handleError(err);
-        res.status(400).json();
+
+        // response
+        res.status(201).json({data: {username: user.username, id: user._id}, status: 201});
+    } catch ({message}) {
+        res.status(400).json(message);
     }
 }
 
