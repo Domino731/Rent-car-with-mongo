@@ -19,10 +19,7 @@ const RegisterValidationSchema = Yup.object().shape(
             .required('Required'),
         password: Yup.string()
             .min(6, 'Should be 6 character long')
-            .required('Required'),
-        passwordRepeat: Yup.string()
-            .min(6, 'Should be 6 character long')
-            .required('Required'),
+            .required('Required')
     }
 );
 

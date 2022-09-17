@@ -1,13 +1,23 @@
-import {FunctionComponent} from "react";
+import {FunctionComponent, useCallback} from "react";
 import Input from "../../Components/Input";
 import {Button} from "../../Components/Button/Button";
-import {Formik} from 'formik';
+import {Formik, FormikValues} from 'formik';
 import {AuthInitialValues, AuthValidationSchema} from "./utils";
 import {AUTH_KEY} from "./types";
 import {FormikInput} from "../../Components/Input/FormikInput";
 import Car from '../../Assets/camaro.png'
+import {useDispatch} from "react-redux";
+import {authRegister} from "../../Redux/auth/thunks";
+import {AnyAction} from "@reduxjs/toolkit";
 
 export const Register: FunctionComponent = () => {
+    const dispatch = useDispatch();
+
+    const handleRegisterUser = useCallback((formikValues: FormikValues) => {
+        const {username, email, password} = formikValues;
+        dispatch(authRegister({username, email, password}) as unknown as AnyAction)
+    }, [dispatch])
+
     return <div className="w-full h-full flex">
         {/*form*/}
         <div className="w-1/2  h-full flex items-center justify-center gradient-wiretap">
@@ -16,13 +26,11 @@ export const Register: FunctionComponent = () => {
                 <Formik
                     initialValues={AuthInitialValues[AUTH_KEY.REGISTER]}
                     validationSchema={AuthValidationSchema[AUTH_KEY.REGISTER]}
-                    onSubmit={(v) => console.log(v)}>
+                    onSubmit={handleRegisterUser}>
                     {({handleSubmit}) => <form>
                         <FormikInput name="username" label="Username" placeholder="Adam123"/>
                         <FormikInput name="email" label="E-mail" placeholder="example@gmail.com"/>
                         <FormikInput name="password" label="Password" placeholder="************" type="password"/>
-                        <FormikInput name="passwordRepeat" label="Repeat password" placeholder="************"
-                                     type="password"/>
                         <div className="mt-10">
                             <Button type="submit" onClick={e => {
                                 e.preventDefault()

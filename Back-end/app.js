@@ -4,9 +4,11 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyParser = require('body-parser')
+const {MONGO_DB} = require("./mongo");
+const userRoute = require("./routes/user");
 
 const port = 8000;
-const dbUrl = process.env['MONGO_DB'];
+const dbUrl = MONGO_DB;
 
 
 const app = express();
@@ -33,6 +35,9 @@ mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true})
         console.log("MONGO - success - connect to database")
     })
     .catch(error => console.log(error))
+
+// routes
+app.use(userRoute);
 
 // listening on port
 app.listen(port, () => {
