@@ -26,7 +26,9 @@ export const Register: FunctionComponent = () => {
                 <Formik
                     initialValues={AuthInitialValues[AUTH_KEY.REGISTER]}
                     validationSchema={AuthValidationSchema[AUTH_KEY.REGISTER]}
-                    onSubmit={handleRegisterUser}>
+                    onSubmit={handleRegisterUser}
+                    validateOnChange={false}
+                >
                     {({handleSubmit}) => <form>
                         <FormikInput name="username" label="Username" placeholder="Adam123"/>
                         <FormikInput name="email" label="E-mail" placeholder="example@gmail.com"/>

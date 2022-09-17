@@ -15,7 +15,7 @@ const RegisterValidationSchema = Yup.object().shape(
             .max(15, 'should not exceed 15 characters')
             .required('Required'),
         email: Yup.string()
-            .email('invalid email address')
+            .email('Invalid email address')
             .required('Required'),
         password: Yup.string()
             .min(6, 'Should be 6 character long')
