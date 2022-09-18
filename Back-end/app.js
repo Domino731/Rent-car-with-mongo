@@ -6,7 +6,10 @@ const cors = require("cors");
 const bodyParser = require('body-parser')
 const {MONGO_DB} = require("./mongo");
 const userRoute = require("./routes/user");
+const crypto = require("crypto");
 
+console.log(crypto.randomBytes(64).toString("hex"))
+console.log(crypto.randomBytes(64).toString("hex"))
 const port = 8000;
 const dbUrl = MONGO_DB;
 

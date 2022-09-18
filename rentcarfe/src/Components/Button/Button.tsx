@@ -16,6 +16,7 @@ export const Button: FunctionComponent<ButtonProps> = ({children, type, onClick,
         type={type}
         className={buttonClassName}
         onClick={(e) => {
+            e.preventDefault();
             if (!disabled && onClick) {
                 onClick(e);
             }

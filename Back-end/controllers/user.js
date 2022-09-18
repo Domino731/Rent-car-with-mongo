@@ -1,6 +1,7 @@
 const UserModel = require('../models/user');
 const jwt = require('jsonwebtoken');
 const {EXPIRATION_TIME} = require("../const");
+const {ACCESS_TOKEN_SECRET} = require("../mongo");
 
 const handleError = (error) => {
     let message = {text: ''}
@@ -33,7 +34,7 @@ module.exports.register_post = async (req, res) => {
         // create new user
         const user = await UserModel.create({email, password, username});
 
-        // set jwt token to cookie
+        // set jwt token cookie
         const token = createToken(user._id);
         res.cookie('jwt', token, {
             httpOnly: true,
@@ -47,4 +48,16 @@ module.exports.register_post = async (req, res) => {
     }
 }
 
+module.exports.loginPost = async (req, res) => {
+    const {email, password} = req.body;
+    try {
+        const user = {email, password};
+        // const accessToken = jwt.sign(user, ACCESS_TOKEN_SECRET);
+        // res.status(201).json({accessToken});
+    } catch (e) {
+        console.log(e);
+        res.status(201).json({message: "Error"})
+    }
+}
 
+module.exports.authenticateToken = undefined;
