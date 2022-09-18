@@ -1,5 +1,4 @@
 import {FunctionComponent, useCallback} from "react";
-import Input from "../../Components/Input";
 import {Button} from "../../Components/Button/Button";
 import {Formik, FormikValues} from 'formik';
 import {AuthInitialValues, AuthValidationSchema} from "./utils";

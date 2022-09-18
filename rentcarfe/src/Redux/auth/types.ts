@@ -4,6 +4,11 @@ export interface NewUser {
     email: string;
 }
 
+export interface UserLoginData {
+    username: string;
+    email: string;
+}
+
 export interface User {
     username: string;
     id: string;

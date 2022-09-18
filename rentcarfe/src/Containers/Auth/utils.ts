@@ -1,6 +1,9 @@
 import {AUTH_KEY} from "./types";
 import * as Yup from 'yup';
 
+// INITIAL VALUES FOR FORMIK
+
+/**  register form initial values */
 const RegisterInitialValues = {
     username: '',
     email: '',
@@ -8,6 +11,15 @@ const RegisterInitialValues = {
     passwordRepeat: ''
 }
 
+/**  register form initial values */
+const LoginInitialValues = {
+    email: '',
+    password: '',
+}
+
+// VALIDATION SCHEME FOR FORMIK
+
+// register form validation schema for formik
 const RegisterValidationSchema = Yup.object().shape(
     {
         username: Yup.string()
@@ -23,12 +35,27 @@ const RegisterValidationSchema = Yup.object().shape(
     }
 );
 
+// login form validation schema for formik
+const LoginValidationSchema = Yup.object().shape(
+    {
+        email: Yup.string()
+            .email('Invalid email address')
+            .required('Required'),
+        password: Yup.string()
+            .required('Required')
+    }
+);
+
+/** auth form initial values */
 export const AuthInitialValues = {
-    [AUTH_KEY.REGISTER]: RegisterInitialValues
+    [AUTH_KEY.REGISTER]: RegisterInitialValues,
+    [AUTH_KEY.LOGIN]: LoginInitialValues
 }
 
+/** auth form validation  */
 export const AuthValidationSchema = {
-    [AUTH_KEY.REGISTER]: RegisterValidationSchema
+    [AUTH_KEY.REGISTER]: RegisterValidationSchema,
+    [AUTH_KEY.LOGIN]: LoginValidationSchema
 }
 
 

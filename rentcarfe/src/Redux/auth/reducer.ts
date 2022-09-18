@@ -1,17 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction} from '@reduxjs/toolkit'
-import {authRegister} from "./thunks";
+import {authLogin, authRegister} from "./thunks";
 import {User} from "./types";
 
 export interface CounterState {
     value: number;
     registerLoader: boolean;
+    loginLoader: boolean;
     user: User | null;
 }
 
 const initialState: CounterState = {
     value: 0,
     registerLoader: false,
+    loginLoader: false,
     user: null
 }
 
@@ -39,6 +41,16 @@ export const auth = createSlice({
             state.registerLoader = true;
         }).addCase(authRegister.rejected, (state) => {
             state.registerLoader = false;
+            state.user = null;
+        })
+        // login user
+        .addCase(authLogin.fulfilled, (state, action) => {
+            state.user = action.payload;
+            state.loginLoader = false;
+        }).addCase(authLogin.pending, (state) => {
+            state.loginLoader = true;
+        }).addCase(authLogin.rejected, (state) => {
+            state.loginLoader = false;
             state.user = null;
         })
 })

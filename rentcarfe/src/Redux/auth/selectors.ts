@@ -7,5 +7,8 @@ const AuthState = (state: RootState) => state[AUTH_REDUCER_NAME];
 // is user logged
 export const authIsUserLoggedSelector = createSelector(AuthState, (state) => Boolean(state.user));
 
-// loaders
+// LOADERS
+// register loader
 export const authRegisterLoaderSelector = createSelector(AuthState, (state) => state.registerLoader);
+// login loader
+export const authLoginLoaderSelector = createSelector(AuthState, (state) => state.loginLoader);
