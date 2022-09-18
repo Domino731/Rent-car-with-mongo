@@ -27,7 +27,7 @@ const createToken = (id) => {
 }
 
 /** Controller, create new user is mongoDB, also create jwt token */
-module.exports.register_post = async (req, res) => {
+module.exports.registerPost = async (req, res) => {
     const {email, password, username} = req.body;
 
     try {
@@ -52,8 +52,13 @@ module.exports.loginPost = async (req, res) => {
     const {email, password} = req.body;
     try {
         const user = {email, password};
-        // const accessToken = jwt.sign(user, ACCESS_TOKEN_SECRET);
-        // res.status(201).json({accessToken});
+        // set jwt token cookie
+        // const token = createToken(user._id);
+        // res.cookie('jwt', token, {
+        //     httpOnly: true,
+        //     expiresIn: 3 * 60 * 60 * 24 * 1000
+        // });
+        res.status(201).json({user});
     } catch (e) {
         console.log(e);
         res.status(201).json({message: "Error"})
