@@ -8,23 +8,24 @@ import Car from '../../Assets/camaro.png'
 import {useDispatch, useSelector} from "react-redux";
 import {authRegister} from "../../Redux/auth/thunks";
 import {AnyAction} from "@reduxjs/toolkit";
-import {authRegisterLoaderSelector} from "../../Redux/auth/selectors";
+import {authLoginLoaderSelector} from "../../Redux/auth/selectors";
 
 export const Login: FunctionComponent = () => {
     const dispatch = useDispatch();
 
-    const authRegisterLoader = useSelector(authRegisterLoaderSelector);
+    const authLoginLoader = useSelector(authLoginLoaderSelector);
 
     const handleRegisterUser = useCallback((formikValues: FormikValues) => {
         const {username, email, password} = formikValues;
         dispatch(authRegister({username, email, password}) as unknown as AnyAction)
     }, [dispatch])
 
+    // TODO: form automation - login, register, password recovery
     return <div className="w-full h-full flex">
         {/*form*/}
         <div className="w-1/2  h-full flex items-center justify-center gradient-wiretap">
             <div className="w-[350px] bg-white rounded-md drop-shadow-2xl px-3.5 py-2">
-                <h1 className="font-bold text-[40px] mb-[20px]">Register</h1>
+                <h1 className="font-bold text-[40px] mb-[20px]">Login</h1>
                 <Formik
                     initialValues={AuthInitialValues[AUTH_KEY.REGISTER]}
                     validationSchema={AuthValidationSchema[AUTH_KEY.REGISTER]}
@@ -32,11 +33,10 @@ export const Login: FunctionComponent = () => {
                     validateOnChange={false}
                 >
                     {({handleSubmit}) => <form>
-                        <FormikInput name="username" label="Username" placeholder="Adam123"/>
-                        <FormikInput name="email" label="E-mail" placeholder="example@gmail.com"/>
+                        <FormikInput name="email" label="E-mail" placeholder="your e-mail"/>
                         <FormikInput name="password" label="Password" placeholder="************" type="password"/>
                         <div className="mt-10">
-                            <Button type="submit" disabled={authRegisterLoader} onClick={e => {
+                            <Button type="submit" disabled={authLoginLoader} onClick={e => {
                                 e.preventDefault()
                                 handleSubmit()
                             }
