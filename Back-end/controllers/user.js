@@ -50,18 +50,19 @@ module.exports.registerPost = async (req, res) => {
 
 module.exports.loginPost = async (req, res) => {
     const {email, password} = req.body;
+
     try {
-        const user = {email, password};
-        // set jwt token cookie
-        // const token = createToken(user._id);
-        // res.cookie('jwt', token, {
-        //     httpOnly: true,
-        //     expiresIn: 3 * 60 * 60 * 24 * 1000
-        // });
-        res.status(201).json({user});
-    } catch (e) {
-        console.log(e);
-        res.status(201).json({message: "Error"})
+        const user = await UserModel.login(email, password);
+        // set jwt token to cookie
+        const token = createToken(user._id);
+        res.cookie('jwt', token, {
+            httpOnly: true,      // 3 days in milliseconds
+            expiresIn: EXPIRATION_TIME
+        });
+        res.status(200).json({data: {id: user._id, username: user.username}, status: 200});
+    } catch (err) {
+        const error = handleError(err);
+        res.status(400).json({message: error});
     }
 }
 

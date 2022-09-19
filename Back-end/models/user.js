@@ -44,6 +44,7 @@ userSchema.pre("save", async function (next) {
     next();
 })
 
+/** Schema static method - try to log the user */
 userSchema.statics.login = async function (email, password) {
     const user = await this.findOne({email});
     if (user) {
@@ -51,10 +52,10 @@ userSchema.statics.login = async function (email, password) {
         if (auth) {
             return user;
         } else {
-            throw Error("Incorrect password");
+            throw Error("Incorrect e-mail or password");
         }
     } else {
-        throw Error("Incorrect email");
+        throw Error("Incorrect e-mail or password");
     }
 }
 
