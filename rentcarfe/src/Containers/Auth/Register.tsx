@@ -1,4 +1,4 @@
-import {FunctionComponent, useCallback} from "react";
+import {FunctionComponent, useCallback, useState} from "react";
 import {Button} from "../../Components/Button/Button";
 import {Formik, FormikValues} from 'formik';
 import {AuthInitialValues, AuthValidationSchema} from "./utils";
@@ -11,6 +11,7 @@ import {AnyAction} from "@reduxjs/toolkit";
 import {authRegisterLoaderSelector} from "../../Redux/auth/selectors";
 import {useNavigate} from "react-router";
 import {ROUTES} from "../../Routes";
+import {FormikErrors} from "formik/dist/types";
 
 export const Register: FunctionComponent = () => {
     const dispatch = useDispatch();
@@ -18,11 +19,10 @@ export const Register: FunctionComponent = () => {
 
     const authRegisterLoader = useSelector(authRegisterLoaderSelector);
 
-    const handleRegisterUser = useCallback((formikValues: FormikValues) => {
+    const handleRegisterUser = useCallback((formikValues: FormikValues, setErrors: (errors: FormikErrors<any>) => void) => {
         const {username, email, password} = formikValues;
         const onSuccess = () => navigate(ROUTES.HOME);
-
-        dispatch(authRegister({username, email, password, onSuccess}) as unknown as AnyAction)
+        dispatch(authRegister({username, email, password, onSuccess, setErrors}) as unknown as AnyAction);
     }, [dispatch, navigate])
 
     return <div className="w-full h-full flex">
@@ -30,20 +30,20 @@ export const Register: FunctionComponent = () => {
         <div className="w-1/2  h-full flex items-center justify-center gradient-wiretap">
             <div className="w-[350px] bg-white rounded-md drop-shadow-2xl px-3.5 py-2">
                 <h1 className="font-bold text-[40px] mb-[20px]">Register</h1>
+                {/*@ts-ignore*/}
                 <Formik
                     initialValues={AuthInitialValues[AUTH_KEY.REGISTER]}
                     validationSchema={AuthValidationSchema[AUTH_KEY.REGISTER]}
-                    onSubmit={handleRegisterUser}
                     validateOnChange={false}
                 >
-                    {({handleSubmit}) => <form>
+                    {({values, setErrors}) => <form>
                         <FormikInput name="username" label="Username" placeholder="Adam123"/>
                         <FormikInput name="email" label="E-mail" placeholder="example@gmail.com"/>
                         <FormikInput name="password" label="Password" placeholder="************" type="password"/>
                         <div className="mt-10">
                             <Button type="submit" disabled={authRegisterLoader} onClick={e => {
                                 e.preventDefault()
-                                handleSubmit()
+                                handleRegisterUser(values, setErrors)
                             }
                             }>Send</Button>
                         </div>

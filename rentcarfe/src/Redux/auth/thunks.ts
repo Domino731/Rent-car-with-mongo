@@ -7,13 +7,18 @@ import {apiRequest} from "../../Api/methods";
 export const authRegister = createAsyncThunk(
     AUTH_ACTIONS.REGISTER,
     async (payload: NewUser) => {
-        const {username, password, email, onSuccess} = payload;
+        const {username, password, email, onSuccess, setErrors} = payload;
         const response = await apiRequest('POST', '/register', {username, password, email});
 
         // on success
         // @ts-ignore
         if (response.code === 201) {
             onSuccess();
+            // @ts-ignore
+        } else if (response.data.code === 400) {
+            // todo: fix nested data
+            const {data: {data: {key, message}}} = response;
+            setErrors({[key]: message});
         }
 
         return response.data;

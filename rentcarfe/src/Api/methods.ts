@@ -7,7 +7,11 @@ export const apiRequest = (method: ApiMethodsUnion, url: string, data?: object, 
         case API_METHODS.GET:
             return api.get(url, config);
         case API_METHODS.POST:
-            return api.post(url, JSON.stringify(data), config);
+            return api.post(url, JSON.stringify(data), {
+                validateStatus: function (status) {
+                    return status < 500; // Resolve only if the status code is less than 500
+                }
+            });
         case API_METHODS.PUT:
             return api.put(url, JSON.stringify(data), config);
         case API_METHODS.DELETE:
