@@ -7,7 +7,15 @@ import {apiRequest} from "../../Api/methods";
 export const authRegister = createAsyncThunk(
     AUTH_ACTIONS.REGISTER,
     async (payload: NewUser) => {
-        const response = await apiRequest('POST', '/register', payload);
+        const {username, password, email, onSuccess} = payload;
+        const response = await apiRequest('POST', '/register', {username, password, email});
+
+        // on success
+        // @ts-ignore
+        if (response.code === 201) {
+            onSuccess();
+        }
+
         return response.data;
     }
 );
@@ -16,7 +24,17 @@ export const authRegister = createAsyncThunk(
 export const authLogin = createAsyncThunk(
     AUTH_ACTIONS.LOGIN,
     async (payload: UserLoginData) => {
-        const response = await apiRequest('POST', '/login', payload);
+        const {email, password, onSuccess, onError} = payload
+        const response = await apiRequest('POST', '/login', {email, password});
+
+        // on success
+        // @ts-ignore
+        if (response.code === 200) {
+            onSuccess();
+        } else {
+            onError(response.data.message)
+        }
+
         return response.data;
     }
 );

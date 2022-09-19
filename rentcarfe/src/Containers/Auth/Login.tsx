@@ -6,19 +6,25 @@ import {AUTH_KEY} from "./types";
 import {FormikInput} from "../../Components/Input/FormikInput";
 import Car from '../../Assets/camaro.png'
 import {useDispatch, useSelector} from "react-redux";
-import {authRegister} from "../../Redux/auth/thunks";
+import {authLogin, authRegister} from "../../Redux/auth/thunks";
 import {AnyAction} from "@reduxjs/toolkit";
 import {authLoginLoaderSelector} from "../../Redux/auth/selectors";
+import {useNavigate} from "react-router";
+import {ROUTES} from "../../Routes";
 
 export const Login: FunctionComponent = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const authLoginLoader = useSelector(authLoginLoaderSelector);
 
     const handleRegisterUser = useCallback((formikValues: FormikValues) => {
-        const {username, email, password} = formikValues;
-        dispatch(authRegister({username, email, password}) as unknown as AnyAction)
-    }, [dispatch])
+        const {email, password} = formikValues;
+        const onSuccess = () => navigate(ROUTES.HOME);
+        const onError = (message: string) => console.log(message);
+        
+        dispatch(authLogin({email, password, onSuccess, onError}) as unknown as AnyAction);
+    }, [dispatch, navigate])
 
     // TODO: form automation - login, register, password recovery
     return <div className="w-full h-full flex">

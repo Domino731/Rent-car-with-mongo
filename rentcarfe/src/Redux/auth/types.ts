@@ -2,11 +2,14 @@ export interface NewUser {
     password: string;
     username: string;
     email: string;
+    onSuccess: () => void;
 }
 
 export interface UserLoginData {
-    username: string;
+    password: string;
     email: string;
+    onSuccess: () => void;
+    onError: (message: string) => void;
 }
 
 export interface User {

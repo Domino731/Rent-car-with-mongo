@@ -43,8 +43,16 @@ module.exports.registerPost = async (req, res) => {
 
         // response
         res.status(201).json({data: {username: user.username, id: user._id}, status: 201});
-    } catch ({message}) {
-        res.status(400).json(message);
+    } catch (err) {
+        let data = {message: "", key: ""};
+        if (err.message.includes('duplicate key error collection') && err.message.includes('email')) {
+            data.message = 'This e-mail is already assigned to other account';
+            data.key = 'email';
+        } else if (err.message.includes('duplicate key error collection') && err.message.includes('username')) {
+            data.message = 'This nickname is already used';
+            data.key = 'username';
+        }
+        res.status(400).json({data, code: 400, message: "FAILED"});
     }
 }
 

@@ -9,16 +9,21 @@ import {useDispatch, useSelector} from "react-redux";
 import {authRegister} from "../../Redux/auth/thunks";
 import {AnyAction} from "@reduxjs/toolkit";
 import {authRegisterLoaderSelector} from "../../Redux/auth/selectors";
+import {useNavigate} from "react-router";
+import {ROUTES} from "../../Routes";
 
 export const Register: FunctionComponent = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const authRegisterLoader = useSelector(authRegisterLoaderSelector);
 
     const handleRegisterUser = useCallback((formikValues: FormikValues) => {
         const {username, email, password} = formikValues;
-        dispatch(authRegister({username, email, password}) as unknown as AnyAction)
-    }, [dispatch])
+        const onSuccess = () => navigate(ROUTES.HOME);
+
+        dispatch(authRegister({username, email, password, onSuccess}) as unknown as AnyAction)
+    }, [dispatch, navigate])
 
     return <div className="w-full h-full flex">
         {/*form*/}
@@ -44,7 +49,6 @@ export const Register: FunctionComponent = () => {
                         </div>
                     </form>}
                 </Formik>
-
             </div>
         </div>
         {/*car */}

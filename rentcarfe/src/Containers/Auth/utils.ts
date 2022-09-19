@@ -5,10 +5,10 @@ import * as Yup from 'yup';
 
 /**  register form initial values */
 const RegisterInitialValues = {
-    username: '',
-    email: '',
-    password: '',
-    passwordRepeat: ''
+    username: 'TEST_1',
+    email: 'TEST_1@gmail.com',
+    password: '123123123',
+    passwordRepeat: '123123123'
 }
 
 /**  register form initial values */

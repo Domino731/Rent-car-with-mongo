@@ -11,6 +11,8 @@ interface ProtectedRouteProps {
 export const PrivateRoute: FunctionComponent<ProtectedRouteProps> = ({children}) => {
     const authIsUserLogged = useSelector(authIsUserLoggedSelector);
 
+    console.log("Test")
+
     if (!authIsUserLogged) {
         return <Navigate to={ROUTES.LOGIN}/>;
     }

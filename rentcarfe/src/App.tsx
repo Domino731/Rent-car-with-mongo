@@ -12,17 +12,17 @@ import PrivateRoute from "./Containers/PrivateRoute";
 import {ROUTES} from "./Routes";
 
 function App() {
+    //
     return (
         <Provider store={store}>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/test" element={<PrivateRoute>
+                    <Route path={ROUTES.HOME} element={<PrivateRoute>
                         <div>HOME</div>
                     </PrivateRoute>}/>
                     <Route path={ROUTES.LOGIN} element={<Login/>}/>
                     <Route path={ROUTES.REGISTER} element={<Register/>}/>
                 </Routes>
-                <Register/>
             </BrowserRouter>
         </Provider>
     );
