@@ -17,7 +17,7 @@ export const authRegister = createAsyncThunk(
             // @ts-ignore
         } else if (response.data.code === 400) {
             // todo: fix nested data
-            const {data: {data: {key, message}}} = response;
+            const {data: {error: {key, message}}} = response;
             setErrors({[key]: message});
         }
 
