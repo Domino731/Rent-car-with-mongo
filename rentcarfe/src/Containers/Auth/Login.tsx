@@ -1,4 +1,4 @@
-import {FunctionComponent, useCallback} from "react";
+import {FunctionComponent, useCallback, useState} from "react";
 import {Button} from "../../Components/Button/Button";
 import {Formik, FormikValues} from 'formik';
 import {AuthInitialValues, AuthValidationSchema} from "./utils";
@@ -6,11 +6,12 @@ import {AUTH_KEY} from "./types";
 import {FormikInput} from "../../Components/Input/FormikInput";
 import Car from '../../Assets/camaro.png'
 import {useDispatch, useSelector} from "react-redux";
-import {authLogin, authRegister} from "../../Redux/auth/thunks";
+import {authLogin} from "../../Redux/auth/thunks";
 import {AnyAction} from "@reduxjs/toolkit";
 import {authLoginLoaderSelector} from "../../Redux/auth/selectors";
 import {useNavigate} from "react-router";
 import {ROUTES} from "../../Routes";
+import {Link} from "react-router-dom";
 
 export const Login: FunctionComponent = () => {
     const dispatch = useDispatch();
@@ -18,12 +19,13 @@ export const Login: FunctionComponent = () => {
 
     const authLoginLoader = useSelector(authLoginLoaderSelector);
 
+    const [error, setError] = useState<string>('');
+
     const handleRegisterUser = useCallback((formikValues: FormikValues) => {
         const {email, password} = formikValues;
         const onSuccess = () => navigate(ROUTES.HOME);
-        const onError = (message: string) => console.log(message);
-        
-        dispatch(authLogin({email, password, onSuccess, onError}) as unknown as AnyAction);
+
+        dispatch(authLogin({email, password, onSuccess, setError}) as unknown as AnyAction);
     }, [dispatch, navigate])
 
     // TODO: form automation - login, register, password recovery
@@ -41,6 +43,7 @@ export const Login: FunctionComponent = () => {
                     {({handleSubmit}) => <form>
                         <FormikInput name="email" label="E-mail" placeholder="your e-mail"/>
                         <FormikInput name="password" label="Password" placeholder="************" type="password"/>
+                        {error && <p className="text-red-500 text-[14px] text-center">{error}</p>}
                         <div className="mt-10">
                             <Button type="submit" disabled={authLoginLoader} onClick={e => {
                                 e.preventDefault()
@@ -50,7 +53,9 @@ export const Login: FunctionComponent = () => {
                         </div>
                     </form>}
                 </Formik>
-
+                <div className="text-center mt-3 hover:text-gray-400">
+                    <Link to={ROUTES.REGISTER}>Don't have an account yet? Create free account</Link>
+                </div>
             </div>
         </div>
         {/*car */}

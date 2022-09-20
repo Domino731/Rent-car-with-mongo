@@ -21,7 +21,7 @@ export const authRegister = createAsyncThunk(
             setErrors({[key]: message});
         }
 
-        return response.data;
+        return response.data.payload;
     }
 );
 
@@ -29,17 +29,17 @@ export const authRegister = createAsyncThunk(
 export const authLogin = createAsyncThunk(
     AUTH_ACTIONS.LOGIN,
     async (payload: UserLoginData) => {
-        const {email, password, onSuccess, onError} = payload
+        const {email, password, onSuccess, setError} = payload
         const response = await apiRequest('POST', '/login', {email, password});
 
-        // on success
         // @ts-ignore
-        if (response.code === 200) {
+        if (response.data.status === 200) {
             onSuccess();
         } else {
-            onError(response.data.message)
+            setError("Invalid e-mail or password")
+            console.log(response);
         }
 
-        return response.data;
+        return response.data.payload;
     }
 );

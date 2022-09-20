@@ -12,6 +12,7 @@ import {authRegisterLoaderSelector} from "../../Redux/auth/selectors";
 import {useNavigate} from "react-router";
 import {ROUTES} from "../../Routes";
 import {FormikErrors} from "formik/dist/types";
+import {Link} from "react-router-dom";
 
 export const Register: FunctionComponent = () => {
     const dispatch = useDispatch();
@@ -49,6 +50,9 @@ export const Register: FunctionComponent = () => {
                         </div>
                     </form>}
                 </Formik>
+                <div className="text-center mt-3 hover:text-gray-400">
+                    <Link to={ROUTES.LOGIN}>Already registered? log in</Link>
+                </div>
             </div>
         </div>
         {/*car */}

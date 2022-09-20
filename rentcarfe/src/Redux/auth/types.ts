@@ -12,7 +12,7 @@ export interface UserLoginData {
     password: string;
     email: string;
     onSuccess: () => void;
-    onError: (message: string) => void;
+    setError: (message: string) => void;
 }
 
 export interface User {

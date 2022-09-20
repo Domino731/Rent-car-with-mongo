@@ -1,23 +1,6 @@
 const UserModel = require('../models/user');
 const jwt = require('jsonwebtoken');
 const {EXPIRATION_TIME} = require("../const");
-const {ACCESS_TOKEN_SECRET} = require("../mongo");
-
-const handleError = (error) => {
-    let message = {text: ''}
-    if (error.message === 'Missing email') {
-        message.text = 'Missing e-mail';
-    } else if (error.message === 'E-mail must be unique') {
-        message.text = 'This e-mail is already assigned to another account';
-    } else if (error.message === 'Please, enter an valid e-mail') {
-        message.text = 'Invalid e-mail';
-    } else if (error.message === 'Missing password') {
-        message.test = 'Missing password';
-    } else if (error.message === 'Password is too short') {
-        message.test = 'Password is too short';
-    }
-    return message;
-}
 
 const createToken = (id) => {
     return jwt.sign({id}, 'User key', {
@@ -42,7 +25,7 @@ module.exports.registerPost = async (req, res) => {
         });
 
         // response
-        res.status(201).json({data: {username: user.username, id: user._id}, status: 201});
+        res.status(201).json({payload: {username: user.username, id: user._id}, status: 201});
     } catch (err) {
         let error = {message: "", key: ""};
         if (err.message.includes('duplicate key error collection') && err.message.includes('email')) {
@@ -70,10 +53,9 @@ module.exports.loginPost = async (req, res) => {
             httpOnly: true,      // 3 days in milliseconds
             expiresIn: EXPIRATION_TIME
         });
-        res.status(200).json({data: {id: user._id, username: user.username}, status: 200});
+        res.status(200).json({payload: {id: user._id, username: user.username}, status: 200});
     } catch (err) {
-        const error = handleError(err);
-        res.status(400).json({message: error});
+        res.status(400).json({code: 400, message: "FAILED"});
     }
 }
 
