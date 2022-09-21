@@ -10,20 +10,22 @@ import {
 } from "react-router-dom";
 import PrivateRoute from "./Containers/PrivateRoute";
 import {ROUTES} from "./Routes";
+import CarCard from "./Components/CarCard";
 
 function App() {
     //
     return (
         <Provider store={store}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path={ROUTES.HOME} element={<PrivateRoute>
-                        <div>HOME</div>
-                    </PrivateRoute>}/>
-                    <Route path={ROUTES.LOGIN} element={<Login/>}/>
-                    <Route path={ROUTES.REGISTER} element={<Register/>}/>
-                </Routes>
-            </BrowserRouter>
+            <CarCard/>
+            {/*<BrowserRouter>*/}
+            {/*    <Routes>*/}
+            {/*        <Route path={ROUTES.HOME} element={<PrivateRoute>*/}
+            {/*            <div>HOME</div>*/}
+            {/*        </PrivateRoute>}/>*/}
+            {/*        <Route path={ROUTES.LOGIN} element={<Login/>}/>*/}
+            {/*        <Route path={ROUTES.REGISTER} element={<Register/>}/>*/}
+            {/*    </Routes>*/}
+            {/*</BrowserRouter>*/}
         </Provider>
     );
 }
