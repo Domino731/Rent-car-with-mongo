@@ -13,8 +13,8 @@ const RegisterInitialValues = {
 
 /**  register form initial values */
 const LoginInitialValues = {
-    email: '',
-    password: '',
+    email: 'TEST_1@gmail.com',
+    password: '123123123',
 }
 
 // VALIDATION SCHEME FOR FORMIK

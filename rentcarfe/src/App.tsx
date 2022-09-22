@@ -11,21 +11,19 @@ import {
 import PrivateRoute from "./Containers/PrivateRoute";
 import {ROUTES} from "./Routes";
 import CarCard from "./Components/CarCard";
+import Dashboard from "./Containers/Dashboard";
 
 function App() {
     //
     return (
         <Provider store={store}>
-            <CarCard/>
-            {/*<BrowserRouter>*/}
-            {/*    <Routes>*/}
-            {/*        <Route path={ROUTES.HOME} element={<PrivateRoute>*/}
-            {/*            <div>HOME</div>*/}
-            {/*        </PrivateRoute>}/>*/}
-            {/*        <Route path={ROUTES.LOGIN} element={<Login/>}/>*/}
-            {/*        <Route path={ROUTES.REGISTER} element={<Register/>}/>*/}
-            {/*    </Routes>*/}
-            {/*</BrowserRouter>*/}
+            <BrowserRouter>
+                <Routes>
+                    <Route path={ROUTES.HOME} element={<Dashboard/>}/>
+                    {/*<Route path={ROUTES.LOGIN} element={<Login/>}/>*/}
+                    {/*<Route path={ROUTES.REGISTER} element={<Register/>}/>*/}
+                </Routes>
+            </BrowserRouter>
         </Provider>
     );
 }

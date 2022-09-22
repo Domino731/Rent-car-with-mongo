@@ -1,11 +1,7 @@
-import {useMemo} from "react";
-import classNames from "classnames";
 import imgSrc from '../../Assets/example_car.jpg'
 
 /** card component with basic car info - image, year, hp, price */
 export const CarCard = () => {
-    const wrapperClassName = useMemo(() => classNames(''), []);
-
     return <div className="ml-4 mt-4 flex">
         <div
             className="w-[400px] drop-shadow-lg bg-white  border-solid border-[1px] border-gray-300 rounded-md overflow-hidden pb-3.5">

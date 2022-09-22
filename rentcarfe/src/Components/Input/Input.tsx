@@ -32,7 +32,7 @@ export const Input: FunctionComponent<InputProps> = (
         }
     ); // => 'foo bar'
 
-    return <div className="mb-3">
+    return <div className="mb-3 w-full">
         {label && <label className="block font-medium">{label}</label>}
         <input
             className={inputClassName}
