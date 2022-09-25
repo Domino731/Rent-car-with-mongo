@@ -1,7 +1,7 @@
 import {ChangeEventHandler, FunctionComponent} from "react";
 import classNames from "classnames";
 
-interface InputProps {
+export interface InputProps {
     name?: string;
     value?: string;
     onChange?: ChangeEventHandler<HTMLInputElement>;
