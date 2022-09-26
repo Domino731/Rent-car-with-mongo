@@ -1,8 +1,12 @@
 import Divider from "../../Components/Divider";
 import {Formik, FormikValues} from 'formik';
-import {useCallback, useMemo} from "react";
+import {useCallback, useMemo, useRef} from "react";
+import {useOutsideClick} from "../../Hooks/useOutsideClick";
 
 const NewCarModal = () => {
+    const ref = useRef(null);
+
+    useOutsideClick(ref, (e) => console.log(e))
 
     // initial values for formik
     const initialValues = useMemo(() => ({
@@ -39,7 +43,7 @@ const NewCarModal = () => {
     flex justify-center items-center
     py-[100px]
     ">
-        <div className="modal-size-md bg-white rounded-md h-full drop-shadow-xl px-6 py-6">
+        <div className="modal-size-md bg-white rounded-md h-full drop-shadow-xl px-6 py-6" ref={ref}>
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                 <form>
                     {/*title*/}
