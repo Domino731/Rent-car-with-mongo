@@ -55,3 +55,11 @@ body {
 .dropdown-no-border li:last-child {
     /*border: none !important;*/
 }
+
+.modal-background {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-size-md {
+    width: 1200px;
+}
