@@ -1,3 +1,3 @@
-import {Checkbox} from "./Checkbox";
+import {Checkbox, FormikCheckbox} from "./Checkbox";
 
-export default Checkbox;
+export {Checkbox, FormikCheckbox};
