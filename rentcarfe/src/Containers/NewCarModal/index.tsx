@@ -2,6 +2,7 @@ import Divider from "../../Components/Divider";
 import {Formik, FormikValues} from 'formik';
 import {useCallback, useMemo, useRef} from "react";
 import {useOutsideClick} from "../../Hooks/useOutsideClick";
+import {FormikInput} from "../../Components/Input/FormikInput";
 
 const NewCarModal = () => {
     const ref = useRef(null);
@@ -44,13 +45,52 @@ const NewCarModal = () => {
     py-[100px]
     ">
         <div className="modal-size-md bg-white rounded-md h-full drop-shadow-xl px-6 py-6" ref={ref}>
+            {/*title*/}
+            <header>
+                <h2 className="text-[42px]">Add new car</h2>
+                <Divider/>
+            </header>
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                 <form>
-                    {/*title*/}
-                    <header>
-                        <h1 className="text-[42px]">Add new car</h1>
-                        <Divider/>
-                    </header>
+                    <div className="w-1/2 mt-10">
+                        <FormikInput name="VIN" label="VIN" placeholder="XXXXXXXXXXXXXX" required/>
+                    </div>
+                    <div className="flex gap-3 mt-14">
+                        <FormikInput name="productionYear" label="Production year" placeholder="20.10.12" required/>
+                        <FormikInput name="brand" label="Brand" placeholder="toyota" required/>
+                        <FormikInput name="model" label="Model" placeholder="x-cr" required/>
+                    </div>
+                    <div className="flex gap-3 mt-6">
+                        <FormikInput name="fuelType" label="Fuel type" placeholder="electric" required/>
+                        <FormikInput name="power" label="Power (hp)" placeholder="120hp" required/>
+                        <FormikInput name="engineSize" label="Engine size" placeholder="x-cr" required/>
+                    </div>
+
+                    <div className="flex gap-3 mt-6">
+                        <FormikInput name="doorsAmount" label="Doors amount" placeholder="4" required/>
+                        <FormikInput name="gearbox" label="Gearbox" placeholder="Manual" required/>
+                        <FormikInput name="gearboxVersion" label="Version" placeholder="" required/>
+                        <FormikInput name="generation" label="Generation" placeholder="" required/>
+                    </div>
+
+                    <div className="flex w-1/3 mt-6">
+                        <FormikInput name="mileage" label="Mileage" required/>
+                    </div>
+
+                    <div className=" mt-6 w-full">
+                        <label className="block font-medium text-xl block">Title</label>
+                        <input
+                            name="title"
+                            type="text"
+                            required
+                            className="border-b-solid border-b-2 border-gray-300 w-full py-2 px-1 w-full"/>
+                    </div>
+                    <div className="flex w-1/3 mt-6">
+                        <FormikInput name="type" label="Type" required/>
+                    </div>
+                    <div className="flex w-1/3 mt-6">
+                        <FormikInput name="color" label="Color" required/>
+                    </div>
                 </form>
             </Formik>
         </div>

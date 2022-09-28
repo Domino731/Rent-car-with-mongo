@@ -7,10 +7,11 @@ interface FormikInputProps {
     label?: string;
     placeholder?: string;
     type?: string;
+    required?: boolean;
 }
 
 /** Formik input component */
-export const FormikInput: FunctionComponent<FormikInputProps> = ({name, label, placeholder, type}) => {
+export const FormikInput: FunctionComponent<FormikInputProps> = ({name, label, placeholder, type, required}) => {
     const [field, meta] = useField(name);
 
     return <Input value={field.value}
