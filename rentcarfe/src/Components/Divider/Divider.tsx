@@ -1,1 +1,1 @@
-export const Divider = () => <span className="block w-full h-[1px] border-solid border-[1px] border-gray-300"/>
+export const Divider = () => <span className="block w-full h-[1px] border-solid border-[1px] border-sky-500"/>

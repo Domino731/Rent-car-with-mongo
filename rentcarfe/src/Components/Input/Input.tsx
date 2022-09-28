@@ -10,6 +10,7 @@ export interface InputProps {
     type?: string;
     isError?: boolean;
     errorMessage?: string;
+    required?: boolean;
 }
 
 export const Input: FunctionComponent<InputProps> = (
@@ -21,7 +22,8 @@ export const Input: FunctionComponent<InputProps> = (
         placeholder,
         type,
         errorMessage,
-        isError
+        isError,
+        required
     }
 ) => {
     const inputClassName = classNames(
@@ -31,11 +33,14 @@ export const Input: FunctionComponent<InputProps> = (
             'border-red-600': isError
         },
         'hover:border-sky-400',
-        'focus:outline-none focus:border-sky-500 focus:bg-gray-100'
+        'focus:outline-none focus:border-sky-500 focus:bg-slate-100'
     ); // => 'foo bar'
 
     return <div className="mb-3 w-full">
-        {label && <label className="block font-medium">{label}</label>}
+        {label && <label className="block font-medium">
+            {label}
+            {required && <span className="text-red-500">*</span>}
+        </label>}
         <input
             className={inputClassName}
             name={name}

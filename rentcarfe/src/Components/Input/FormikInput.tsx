@@ -22,5 +22,6 @@ export const FormikInput: FunctionComponent<FormikInputProps> = ({name, label, p
                   placeholder={placeholder}
                   isError={Boolean(meta.touched && meta.error)}
                   errorMessage={meta.error}
+                  required={required}
     />
 }
