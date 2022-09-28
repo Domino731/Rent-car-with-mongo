@@ -3,6 +3,7 @@ import {Formik, FormikValues} from 'formik';
 import {useCallback, useMemo, useRef} from "react";
 import {useOutsideClick} from "../../Hooks/useOutsideClick";
 import {FormikInput} from "../../Components/Input/FormikInput";
+import {FormikCheckbox} from "../../Components/Checkbox";
 
 const NewCarModal = () => {
     const ref = useRef(null);
@@ -52,6 +53,12 @@ const NewCarModal = () => {
             </header>
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                 <form>
+                    <div className="flex gap-[70px] mt-2">
+                        <FormikCheckbox name="imported" label="Imported"/>
+                        <FormikCheckbox name="damaged" label="Damaged"/>
+                        <FormikCheckbox name="rightHand" label="Right-Hand"/>
+                    </div>
+
                     <div className="w-1/2 mt-10">
                         <FormikInput name="VIN" label="VIN" placeholder="XXXXXXXXXXXXXX" required/>
                     </div>
@@ -60,24 +67,24 @@ const NewCarModal = () => {
                         <FormikInput name="brand" label="Brand" placeholder="toyota" required/>
                         <FormikInput name="model" label="Model" placeholder="x-cr" required/>
                     </div>
-                    <div className="flex gap-3 mt-6">
+                    <div className="flex gap-3 mt-2">
                         <FormikInput name="fuelType" label="Fuel type" placeholder="electric" required/>
                         <FormikInput name="power" label="Power (hp)" placeholder="120hp" required/>
                         <FormikInput name="engineSize" label="Engine size" placeholder="x-cr" required/>
                     </div>
 
-                    <div className="flex gap-3 mt-6">
+                    <div className="flex gap-3 mt-2">
                         <FormikInput name="doorsAmount" label="Doors amount" placeholder="4" required/>
                         <FormikInput name="gearbox" label="Gearbox" placeholder="Manual" required/>
                         <FormikInput name="gearboxVersion" label="Version" placeholder="" required/>
                         <FormikInput name="generation" label="Generation" placeholder="" required/>
                     </div>
 
-                    <div className="flex w-1/3 mt-6">
+                    <div className="flex w-1/3 mt-2">
                         <FormikInput name="mileage" label="Mileage" required/>
                     </div>
 
-                    <div className=" mt-6 w-full">
+                    <div className=" mt-2 w-full">
                         <label className="block font-medium text-xl block">Title</label>
                         <input
                             name="title"
@@ -85,10 +92,10 @@ const NewCarModal = () => {
                             required
                             className="border-b-solid border-b-2 border-gray-300 w-full py-2 px-1 w-full"/>
                     </div>
-                    <div className="flex w-1/3 mt-6">
+                    <div className="flex w-1/3 mt-2">
                         <FormikInput name="type" label="Type" required/>
                     </div>
-                    <div className="flex w-1/3 mt-6">
+                    <div className="flex w-1/3 mt-2">
                         <FormikInput name="color" label="Color" required/>
                     </div>
                 </form>

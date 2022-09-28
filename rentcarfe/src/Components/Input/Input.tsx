@@ -29,7 +29,9 @@ export const Input: FunctionComponent<InputProps> = (
         {
             'border-gray-300': !isError,
             'border-red-600': isError
-        }
+        },
+        'hover:border-sky-400',
+        'focus:outline-none focus:border-sky-500 focus:bg-gray-100'
     ); // => 'foo bar'
 
     return <div className="mb-3 w-full">
