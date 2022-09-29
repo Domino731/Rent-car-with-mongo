@@ -4,7 +4,7 @@ import {useCallback, useMemo, useRef} from "react";
 import {useOutsideClick} from "../../Hooks/useOutsideClick";
 import {FormikInput} from "../../Components/Input/FormikInput";
 import {FormikCheckbox} from "../../Components/Checkbox";
-import {NewCarInitialValues} from "./const";
+import {NewCarInitialValues, NewCarValidationSchema} from "./const";
 import {Button} from "../../Components/Button/Button";
 
 const NewCarModal = () => {
@@ -31,7 +31,11 @@ const NewCarModal = () => {
                 <h2 className="text-[42px]">Add new car</h2>
                 <Divider/>
             </header>
-            <Formik initialValues={NewCarInitialValues} onSubmit={handleSubmit}>
+            <Formik
+                initialValues={NewCarInitialValues}
+                onSubmit={handleSubmit}
+                validationSchema={NewCarValidationSchema}
+            >
                 <form className="h-full flex flex-col">
                     <div className="flex-grow">
                         <div className="flex gap-[70px] mt-2">
