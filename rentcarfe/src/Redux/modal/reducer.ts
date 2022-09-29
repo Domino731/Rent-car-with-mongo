@@ -23,5 +23,5 @@ const modalReducer = createSlice({
     },
 })
 
-export const {openAddNewCareModal} = modalReducer.actions
+export const {openAddNewCareModal, closeModal} = modalReducer.actions
 export default modalReducer.reducer

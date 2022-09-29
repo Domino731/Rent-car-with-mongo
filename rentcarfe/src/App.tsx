@@ -13,6 +13,7 @@ import {ROUTES} from "./Routes";
 import CarCard from "./Components/CarCard";
 import Dashboard from "./Containers/Dashboard";
 import NewCarModal from "./Containers/NewCarModal";
+import ModalManagement from "./Containers/ModalManagement";
 
 function App() {
     //
@@ -26,7 +27,7 @@ function App() {
                         {/*<Route path={ROUTES.REGISTER} element={<Register/>}/>*/}
                     </Routes>
                 </BrowserRouter>
-                <NewCarModal/>
+                <ModalManagement/>
             </Provider>
         </div>
     );
