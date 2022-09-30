@@ -8,11 +8,8 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
-import PrivateRoute from "./Containers/PrivateRoute";
 import {ROUTES} from "./Routes";
-import CarCard from "./Components/CarCard";
 import Dashboard from "./Containers/Dashboard";
-import NewCarModal from "./Containers/NewCarModal";
 import ModalManagement from "./Containers/ModalManagement";
 
 function App() {
@@ -23,8 +20,8 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path={ROUTES.HOME} element={<Dashboard/>}/>
-                        {/*<Route path={ROUTES.LOGIN} element={<Login/>}/>*/}
-                        {/*<Route path={ROUTES.REGISTER} element={<Register/>}/>*/}
+                        <Route path={ROUTES.LOGIN} element={<Login/>}/>
+                        <Route path={ROUTES.REGISTER} element={<Register/>}/>
                     </Routes>
                 </BrowserRouter>
                 <ModalManagement/>
