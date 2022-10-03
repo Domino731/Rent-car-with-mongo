@@ -17,6 +17,7 @@ const NewCarModal = () => {
         console.log(formikValues);
     }, [])
 
+    //
     return <div className="
     absolute top-0 left-0
     w-full h-full
@@ -36,14 +37,15 @@ const NewCarModal = () => {
                 onSubmit={handleSubmit}
                 validationSchema={NewCarValidationSchema}
             >
-                <form className="h-full flex flex-col">
+                {({handleSubmit}) => <form className="h-full flex flex-col">
+                    {/*@ts-ignore*/}
                     <div className="flex-grow">
+
                         <div className="flex gap-[70px] mt-2">
                             <FormikCheckbox name="imported" label="Imported"/>
                             <FormikCheckbox name="damaged" label="Damaged"/>
                             <FormikCheckbox name="rightHand" label="Right-Hand"/>
                         </div>
-
                         <div className="w-1/2 mt-10">
                             <FormikInput name="VIN" label="VIN" placeholder="XXXXXXXXXXXXXX" required/>
                         </div>
@@ -86,10 +88,10 @@ const NewCarModal = () => {
                     </div>
                     <div className="flex w-full justify-end">
                         <div className="w-1/3">
-                            <Button>Next</Button>
+                            <Button onClick={() => handleSubmit()}>Next</Button>
                         </div>
                     </div>
-                </form>
+                </form>}
             </Formik>
         </div>
     </div>
