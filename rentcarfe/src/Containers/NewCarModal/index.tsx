@@ -1,12 +1,13 @@
 import Divider from "../../Components/Divider";
 import {Formik, FormikValues} from 'formik';
-import {useCallback, useMemo, useRef} from "react";
+import {useCallback, useRef} from "react";
 import {useOutsideClick} from "../../Hooks/useOutsideClick";
 import {FormikInput} from "../../Components/Input/FormikInput";
 import {FormikCheckbox} from "../../Components/Checkbox";
 import {NewCarInitialValues, NewCarValidationSchema} from "./const";
 import {Button} from "../../Components/Button/Button";
-import {FormikTextarea, Textarea} from "../../Components/Input/Textarea";
+import {FormikTextarea} from "../../Components/Input/Textarea";
+import Car from '../../Assets/green_mustang.jpg'
 
 const NewCarModal = () => {
     const ref = useRef(null);
@@ -27,7 +28,11 @@ const NewCarModal = () => {
     flex justify-center items-center
     py-[100px]
     ">
+        <div className="rounded-md h-[1097px] overflow-hidden relative right-[-10px]">
+            <img src={Car} alt="car" className="h-full"/>
+        </div>
         <div className="modal-size-md bg-white rounded-md h-full drop-shadow-xl px-6 py-6 flex flex-col" ref={ref}>
+
             {/*title*/}
             <header>
                 <h2 className="text-[42px]">Add new car</h2>
