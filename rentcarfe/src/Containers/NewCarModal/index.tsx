@@ -6,6 +6,7 @@ import {FormikInput} from "../../Components/Input/FormikInput";
 import {FormikCheckbox} from "../../Components/Checkbox";
 import {NewCarInitialValues, NewCarValidationSchema} from "./const";
 import {Button} from "../../Components/Button/Button";
+import {FormikTextarea, Textarea} from "../../Components/Input/Textarea";
 
 const NewCarModal = () => {
     const ref = useRef(null);
@@ -79,12 +80,20 @@ const NewCarModal = () => {
                                 required
                                 className="border-b-solid border-b-2 border-gray-300 w-full py-2 px-1 w-full"/>
                         </div>
-                        <div className="flex w-1/3 mt-2">
-                            <FormikInput name="type" label="Type" required/>
+                        <div className="flex mt-2">
+                            <div className="w-1/3">
+                                <div className="flex w-full">
+                                    <FormikInput name="type" label="Type" required/>
+                                </div>
+                                <div className="flex w-full mt-2">
+                                    <FormikInput name="color" label="Color" required/>
+                                </div>
+                            </div>
+                            <div className="w-2/3 h-[275px] ml-[0.75rem]">
+                                <FormikTextarea label="Description" name="description" required/>
+                            </div>
                         </div>
-                        <div className="flex w-1/3 mt-2">
-                            <FormikInput name="color" label="Color" required/>
-                        </div>
+
                     </div>
                     <div className="flex w-full justify-end">
                         <div className="w-1/3">

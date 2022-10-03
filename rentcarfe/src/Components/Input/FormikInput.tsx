@@ -2,7 +2,7 @@ import {FunctionComponent, useMemo} from "react";
 import {useField} from "formik";
 import {Input} from "./Input";
 
-interface FormikInputProps {
+export interface FormikInputProps {
     name: string;
     label?: string;
     placeholder?: string;
