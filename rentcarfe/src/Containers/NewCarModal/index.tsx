@@ -8,6 +8,7 @@ import {NewCarInitialValues, NewCarValidationSchema} from "./const";
 import {Button} from "../../Components/Button/Button";
 import {FormikTextarea} from "../../Components/Input/Textarea";
 import Car from '../../Assets/green_mustang.jpg'
+import {Status} from "./Components/Status";
 
 const NewCarModal = () => {
     const ref = useRef(null);
@@ -100,7 +101,8 @@ const NewCarModal = () => {
                         </div>
 
                     </div>
-                    <div className="flex w-full justify-end">
+                    <div className="flex w-full justify-between">
+                        <Status/>
                         <div className="w-1/3">
                             <Button onClick={() => handleSubmit()}>Next</Button>
                         </div>
