@@ -8,7 +8,9 @@ interface AddNewCarState {
 }
 
 const initialState: AddNewCarState = {
+    // current add new car step
     currentStep: ADD_NEW_CAR_STEPS.BASIC_DATA,
+    // array with completed steps
     completedSteps: []
 }
 
