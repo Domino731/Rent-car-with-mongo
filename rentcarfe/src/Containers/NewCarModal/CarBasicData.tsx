@@ -8,18 +8,24 @@ import {Button} from "../../Components/Button/Button";
 import {FormikTextarea} from "../../Components/Input/Textarea";
 import {Status} from "./Components/Status";
 import {Modal} from "./Components/Modal";
+import {ADD_NEW_CAR_STEPS} from "../../Redux/AddNewCar/const";
+import {setCarBasicData, setCurrentStep} from "../../Redux/AddNewCar/reducer";
+import {batch, useDispatch} from "react-redux";
 
 export const CarBasicData = () => {
     const ref = useRef(null);
+    const dispatch = useDispatch();
 
     useOutsideClick(ref, (e) => console.log(e))
 
-    // submit fnc for formik
+    // set basic data in redux state & redirect user to next step
     const handleSubmit = useCallback((formikValues: FormikValues) => {
-        console.log(formikValues);
-    }, [])
+        batch(() => {
+            dispatch(setCurrentStep(ADD_NEW_CAR_STEPS.EQUIPMENT_AND_IMAGES));
+            dispatch(setCarBasicData(formikValues));
+        });
+    }, [dispatch])
 
-    //
     return <Modal onSubmit={handleSubmit} validationSchema={NewCarValidationSchema} initialValues={NewCarInitialValues}>
         {({handleSubmit}) => <form className="h-full flex flex-col">
             <div className="flex-grow">
